@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>AlmoxPux</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64"><b>PUC<br>Minas</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Início</a> 
+    <a href="#Ferramentas" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Ferramentas</a> 
+    <a href="#Solicitacao" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Solicitação</a> 
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Company Name</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="showcase">
+    <h1 class="w3-jumbo"><b>ALMOXPUC</b></h1>
+    <h1 class="w3-xxxlarge w3-text-blue"><b>Solicite aqui sua ferramenta</b></h1>
+    <hr style="width:50px;border:5px solid blue" class="w3-round">
+  </div>
+  
+  <!-- Photo grid (modal) -->
+  <div class="w3-row-padding">
+    <div class="w3-half">
+        <img src="/martelo.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Martelo">
+        <img src="/marreta.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Marreta">
+        <img src="/grio.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Grio">
+        <img src="/serrotinho.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Serrotinho">
+    </div>
+
+    <div class="w3-half">
+      <img src="/parafusadeira.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Windows for the atrium">
+      <img src="/lixadeira.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Bedroom and office in one space">
+      <img src="/serracircular.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Scandinavian design">
+      <img src="/furadeira.jpg" style="width:40%" class="image-option" onclick="onClick(this)" alt="Light, white and tight scandinavian design">  
+    </div>
+  </div>
+
+  <!-- Modal for full size images on click-->
+  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
+  </div>
+  
+  <!-- Contact -->
+  <div class="w3-container" id="Solicitacao" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue"><b>Solicitação</b></h1>
+    <hr style="width:50px;border:5px solid blue" class="w3-round">
+    <p>Descreva abaixo as ferramentas necessárias e o serviço que será executado:</p>
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-section">
+        <label>Nome funcionário</label>
+        <input class="w3-input w3-border" type="text" name="Name" requiblue>
+      </div>
+      <div class="w3-section">
+        <label>Serviço a ser executado</label>
+        <input class="w3-input w3-border" type="text" name="Email" requiblue>
+      </div>
+      <!-- Campo correto para preencher -->
+        <div class="w3-section">
+            <label>Ferramentas solicitadas</label>
+            <input class="w3-input w3-border" type="text" name="Message" id="ferramentas" required>
+        </div>
+
+      <button type="submit" class="w3-button w3-block w3-padding-large w3-blue w3-margin-bottom">Solicitar</button>
+    </form>  
+  </div>
+
+<!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Poweblue by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+
+function onClick(img) {
+    // Remove a borda azul de todas as imagens
+    document.querySelectorAll('.image-option').forEach(el => el.classList.remove('selected'));
+
+    // Adiciona a borda azul à imagem clicada
+    img.classList.add('selected');
+
+    // Atualiza o campo de entrada com o nome da ferramenta selecionada
+    let campoFerramentas = document.getElementById("ferramentas");
+
+    // Se já existir um texto, adiciona a nova ferramenta separada por vírgula
+    if (campoFerramentas.value) {
+        campoFerramentas.value += ", " + img.alt;
+    } else {
+        campoFerramentas.value = img.alt;
+    }
+}
+</script>
+
+
+</body>
+</html>
