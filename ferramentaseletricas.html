@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colaboradores</title>
+    <title>Ferramentas Elétricas</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         body { font-family: "Poppins", sans-serif; text-align: center; }
@@ -14,42 +14,89 @@
 <body>
 
     <div class="w3-container w3-blue w3-padding">
-        <h2>Lista de Colaboradores</h2>
+        <h2>Lista de Ferramentas</h2>
     </div>
 
     <div class="container">
-        <button class="w3-button w3-green w3-margin" onclick="adicionarColaborador()">Adicionar Colaborador</button>
+        <button class="w3-button w3-green w3-margin" onclick="adicionarFerramenta()">Adicionar Ferramenta</button>
         
-        <ul id="listaColaboradores" class="w3-ul w3-card-4">
-            <li class="w3-padding">Vinicius Betti - Gerente <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button></li>
-            <li class="w3-padding">João Silva - Técnico <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button></li>
-            <li class="w3-padding">Vitor Hugo - Assistente <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button></li>
-        </ul>
+        <ul id="listaFerramentas" class="w3-ul w3-card-4"></ul>
 
         <!-- Botão para voltar à tela inicial -->
         <button class="w3-button w3-blue w3-margin" onclick="voltarParaInicio()">Voltar para Início</button>
     </div>
 
     <script>
-        function adicionarColaborador() {
-            let nome = prompt("Nome do colaborador:");
-            let cargo = prompt("Cargo do colaborador:");
-            if (nome && cargo) {
-                let lista = document.getElementById("listaColaboradores");
-                let novoItem = document.createElement("li");
-                novoItem.classList.add("w3-padding");
-                novoItem.innerHTML = `${nome} - ${cargo} <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button>`;
-                lista.appendChild(novoItem);
+        // Função para carregar ferramentas do LocalStorage
+        function carregarFerramentas() {
+            let lista = document.getElementById("listaFerramentas");
+            let ferramentas = JSON.parse(localStorage.getItem("ferramentas")) || [
+                "Lixadeira",
+                "Parafusadeira",
+                "Rompedor"
+            ];
+
+            // Limpa e adiciona os itens armazenados
+            lista.innerHTML = "";
+            ferramentas.forEach(nome => adicionarItemLista(nome, false));
+
+            // Ordena ao carregar
+            ordenarLista();
+        }
+
+        // Função para adicionar ferramenta
+        function adicionarFerramenta() {
+            let nome = prompt("Nome da ferramenta:");
+            if (nome) {
+                adicionarItemLista(nome, true);
             }
         }
 
+        // Função para adicionar item à lista e salvar no LocalStorage
+        function adicionarItemLista(nome, salvar = true) {
+            let lista = document.getElementById("listaFerramentas");
+            let novoItem = document.createElement("li");
+            novoItem.classList.add("w3-padding");
+            novoItem.innerHTML = `${nome} <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button>`;
+            lista.appendChild(novoItem);
+
+            if (salvar) {
+                salvarFerramentas();
+            }
+
+            ordenarLista();
+        }
+
+        // Função para remover ferramenta e atualizar LocalStorage
         function remover(botao) {
             botao.parentElement.remove();
+            salvarFerramentas();
+        }
+
+        // Função para salvar lista no LocalStorage
+        function salvarFerramentas() {
+            let itens = document.querySelectorAll("#listaFerramentas li");
+            let ferramentas = Array.from(itens).map(item => item.textContent.replace(" X", ""));
+            localStorage.setItem("ferramentas", JSON.stringify(ferramentas));
+        }
+
+        // Função para ordenar a lista alfabeticamente
+        function ordenarLista() {
+            let lista = document.getElementById("listaFerramentas");
+            let itens = Array.from(lista.children);
+
+            itens.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+            lista.innerHTML = "";
+            itens.forEach(item => lista.appendChild(item));
         }
 
         function voltarParaInicio() {
-            window.location.href = "almoxpuc.html"; // Altere para o nome correto da página inicial
+            window.location.href = "almoxpuc.html"; // Ajuste conforme necessário
         }
+
+        // Carrega ferramentas ao iniciar a página
+        window.onload = carregarFerramentas;
     </script>
 
 </body>
