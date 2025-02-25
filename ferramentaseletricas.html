@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colaboradores</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body { font-family: "Poppins", sans-serif; text-align: center; }
+        .container { margin: 50px auto; max-width: 800px; }
+        .w3-card { padding: 15px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="w3-container w3-blue w3-padding">
+        <h2>Lista de Colaboradores</h2>
+    </div>
+
+    <div class="container">
+        <button class="w3-button w3-green w3-margin" onclick="adicionarColaborador()">Adicionar Colaborador</button>
+        
+        <ul id="listaColaboradores" class="w3-ul w3-card-4">
+            <li class="w3-padding">Vinicius Betti - Gerente <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button></li>
+            <li class="w3-padding">João Silva - Técnico <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button></li>
+            <li class="w3-padding">Vitor Hugo - Assistente <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button></li>
+        </ul>
+
+        <!-- Botão para voltar à tela inicial -->
+        <button class="w3-button w3-blue w3-margin" onclick="voltarParaInicio()">Voltar para Início</button>
+    </div>
+
+    <script>
+        function adicionarColaborador() {
+            let nome = prompt("Nome do colaborador:");
+            let cargo = prompt("Cargo do colaborador:");
+            if (nome && cargo) {
+                let lista = document.getElementById("listaColaboradores");
+                let novoItem = document.createElement("li");
+                novoItem.classList.add("w3-padding");
+                novoItem.innerHTML = `${nome} - ${cargo} <button onclick="remover(this)" class="w3-button w3-red w3-small">X</button>`;
+                lista.appendChild(novoItem);
+            }
+        }
+
+        function remover(botao) {
+            botao.parentElement.remove();
+        }
+
+        function voltarParaInicio() {
+            window.location.href = "almoxpuc.html"; // Altere para o nome correto da página inicial
+        }
+    </script>
+
+</body>
+</html>
